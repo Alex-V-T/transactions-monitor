@@ -13,7 +13,7 @@ import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.*;
 
-class Application {
+public class Application {
     private static final Random random = new Random();
 
     public static void main(String[] args) throws IOException, InterruptedException {
