@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/js/app.js"></script>
+</head>
+<body>
+<noscript>
+    <h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+        enabled. Please enable Javascript and reload this page!</h2>
+</noscript>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h4 id="connection-status">Status: <span id="status">establishing connection... </span></h4>
+
+            <ul id="tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#all-transactions-tab" aria-controls="all-transactions-tab" role="tab" data-toggle="tab">All
+                        Transactions</a>
+                </li>
+                <li role="presentation">
+                    <a href="#deposits-tab" aria-controls="deposits-tab" role="tab" data-toggle="tab">Deposits</a>
+                </li>
+                <li role="presentation">
+                    <a href="#withdrawals-tab" aria-controls="withdrawals-tab" role="tab"
+                       data-toggle="tab">Withdrawals</a>
+                </li>
+                <li role="presentation">
+                    <a href="#transfers-tab" aria-controls="transfers-tab" role="tab" data-toggle="tab">Transfers</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="all-transactions-tab" role="tabpanel" class="tab-pane fade in active">
+                    <h3>All Transactions</h3>
+                    <table id="transactions" class="table">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Type</td>
+                                <td>Timestamp</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="deposits-tab" role="tabpanel" class="tab-pane fade">
+                    <h3>Deposits</h3>
+                    <table id="deposits" class="table">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Timestamp</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="withdrawals-tab" role="tabpanel" class="tab-pane fade">
+                    <h3>Withdrawals</h3>
+                    <table id="withdrawals" class="table">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Timestamp</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="transfers-tab" role="tabpanel" class="tab-pane fade">
+                    <h3>Transfers</h3>
+                    <table id="transfers" class="table">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Timestamp</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
