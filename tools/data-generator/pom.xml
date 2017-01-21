@@ -7,7 +7,7 @@
     <parent>
         <artifactId>tools</artifactId>
         <groupId>com.alext.transactions-monitor</groupId>
-        <version>0.1.0.SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>data-generator</artifactId>
@@ -25,6 +25,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <executions>
                     <execution>
                         <goals>
