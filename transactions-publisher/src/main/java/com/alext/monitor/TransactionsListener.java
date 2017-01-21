@@ -26,7 +26,7 @@ class TransactionsListener {
             try {
                 Collection<Transaction> newTransactions = storageApi.getTransactionsNewerThan(idOfLastPublished);
 
-                if (newTransactions != null && newTransactions.size() > 0) {
+                if (newTransactions != null && !newTransactions.isEmpty()) {
                     logger.info("Received {} new transactions", newTransactions.size());
                     for (Transaction transaction : newTransactions) {
                         transaction = fieldsFilter.filter(transaction);
