@@ -9,9 +9,6 @@ class JmsPublisher {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    public JmsPublisher() {
-    }
-
     public void publish(final Transaction message){
         jmsTemplate.convertAndSend(message);
     }
