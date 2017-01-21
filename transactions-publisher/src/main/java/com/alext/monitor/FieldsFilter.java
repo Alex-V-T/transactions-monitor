@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,7 +19,7 @@ public class FieldsFilter {
             @Value("${fields.deposit}") final String depositFields,
             @Value("${fields.withdrawal}") final String withdrawalFields
     ) {
-        fieldsToDisplay = new HashMap<>(3);
+        fieldsToDisplay = new EnumMap<>(TransactionType.class);
 
         fieldsToDisplay.put(TransactionType.TRANSFER, parseString(transferFields));
         fieldsToDisplay.put(TransactionType.DEPOSIT, parseString(depositFields));
