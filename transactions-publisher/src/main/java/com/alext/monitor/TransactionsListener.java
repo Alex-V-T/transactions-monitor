@@ -47,6 +47,7 @@ class TransactionsListener {
                     Thread.sleep(WAIT_BEFORE_RETRY);
                 } catch (InterruptedException e) {
                     logger.info("Interrupted signal received, exiting.");
+                    Thread.currentThread().interrupt();
                     return;
                 }
             }
