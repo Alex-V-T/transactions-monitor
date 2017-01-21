@@ -9,8 +9,6 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
 import java.io.IOException;
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Application {
@@ -22,18 +20,19 @@ public class Application {
         final String url = properties.getProperty("mongo.url");
         final String database = properties.getProperty("mongo.database");
 
-        MongoClient mongoClient = new MongoClient(new MongoClientURI(url));
+        try (MongoClient mongoClient = new MongoClient(new MongoClientURI(url))) {
 
-        MongoCollection<Document> transactions = mongoClient.getDatabase(database).getCollection("transactions");
+            MongoCollection<Document> transactions = mongoClient.getDatabase(database).getCollection("transactions");
 
-        long id = getLatestId(transactions);
+            long id = getLatestId(transactions);
 
-        while (true) {
-            id++;
-            Document newDocument = generateNewTransaction(id);
-            System.out.println("Inserting new document: " + newDocument);
-            transactions.insertOne(newDocument);
-            Thread.sleep(5000);
+            while (id < Integer.MAX_VALUE) {
+                id++;
+                Document newDocument = generateNewTransaction(id);
+                System.out.println("Inserting new document: " + newDocument);
+                transactions.insertOne(newDocument);
+                Thread.sleep(5000);
+            }
         }
     }
 
@@ -45,8 +44,8 @@ public class Application {
 
         AggregateIterable<Document> queryResults = collection.aggregate(pipeline);
 
-        if(queryResults.iterator().hasNext())
-           return  queryResults.iterator().next().getLong(MongoConstants.MAX);
+        if (queryResults.iterator().hasNext())
+            return queryResults.iterator().next().getLong(MongoConstants.MAX);
 
         return 1;
     }
