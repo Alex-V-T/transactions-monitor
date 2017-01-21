@@ -24,9 +24,10 @@ public class MongoStorage implements StorageApi {
 
     MongoStorage(@Value("${mongo.url}") final String url,
                  @Value("${mongo.database}") final String dbName) {
-        MongoClient mongoClient = new MongoClient(new MongoClientURI(url));
-        transactions = mongoClient.getDatabase(dbName).getCollection("transactions");
-        published = mongoClient.getDatabase(dbName).getCollection("published");
+        try (MongoClient mongoClient = new MongoClient(new MongoClientURI(url))) {
+            transactions = mongoClient.getDatabase(dbName).getCollection("transactions");
+            published = mongoClient.getDatabase(dbName).getCollection("published");
+        }
     }
 
     public long getIdOfLastPublished() {
