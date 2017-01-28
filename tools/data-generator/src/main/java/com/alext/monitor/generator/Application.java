@@ -7,12 +7,15 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
 
 public class Application {
     private static final Random random = new Random();
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Properties properties = new Properties();
@@ -29,7 +32,7 @@ public class Application {
             while (id < Integer.MAX_VALUE) {
                 id++;
                 Document newDocument = generateNewTransaction(id);
-                System.out.println("Inserting new document: " + newDocument);
+                logger.info("Inserting new document: {}", newDocument);
                 transactions.insertOne(newDocument);
                 Thread.sleep(5000);
             }
