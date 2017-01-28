@@ -33,7 +33,7 @@ public final class Transaction {
 
     public Map<String, String> getFields() {
         if (fields == null)
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
 
         return Collections.unmodifiableMap(fields);
     }
