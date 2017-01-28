@@ -30,6 +30,7 @@ public class MongoStorage implements StorageApi {
         }
     }
 
+    @Override
     public long getIdOfLastPublished() {
         // MongoDB query looks like this
         // db.published.aggregate({ $group: {_id: null, max: {$max: "$_id"}}});
@@ -46,10 +47,12 @@ public class MongoStorage implements StorageApi {
         return -1;
     }
 
+    @Override
     public void markPublished(Transaction transaction) {
         published.insertOne(new Document(MongoConstants._ID, transaction.getId()));
     }
 
+    @Override
     public Collection<Transaction> getTransactionsNewerThan(long id) {
         // db.transactions.find({_id : {$gt : 3}});
         FindIterable<Document> queryResults = transactions.find(
