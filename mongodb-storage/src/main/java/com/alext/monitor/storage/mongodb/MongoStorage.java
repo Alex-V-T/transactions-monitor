@@ -19,8 +19,8 @@ import java.util.List;
 @Component
 @PropertySource("mongo.properties")
 public class MongoStorage implements StorageApi {
-    final private MongoCollection<Document> transactions;
-    final private MongoCollection<Document> published;
+    private final MongoCollection<Document> transactions;
+    private final MongoCollection<Document> published;
 
     MongoStorage(@Value("${mongo.url}") final String url,
                  @Value("${mongo.database}") final String dbName) {

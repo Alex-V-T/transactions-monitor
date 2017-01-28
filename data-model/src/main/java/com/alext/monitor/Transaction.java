@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-final public class Transaction {
-    final private long id;
-    final private TransactionType type;
-    final private String timestamp; // type is String to simplify serialization
-    final private Map<String, String> fields;
+public final class Transaction {
+    private final long id;
+    private final TransactionType type;
+    private final String timestamp; // type is String to simplify serialization
+    private final Map<String, String> fields;
 
     private Transaction(final Builder builder) {
         id = builder.id;
@@ -72,7 +72,7 @@ final public class Transaction {
         return result;
     }
 
-    final public static class Builder {
+    public static final class Builder {
         private long id;
         private TransactionType type;
         private String timestamp;
