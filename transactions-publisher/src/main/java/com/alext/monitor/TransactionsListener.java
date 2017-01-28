@@ -11,7 +11,7 @@ import java.util.Collection;
 @Component
 class TransactionsListener {
     public static final int WAIT_BEFORE_RETRY = 1000;
-    private final Logger logger = LoggerFactory.getLogger(TransactionsListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(TransactionsListener.class);
     @Autowired
     private StorageApi storageApi;
     @Autowired
