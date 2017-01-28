@@ -50,17 +50,20 @@ public final class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return  true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Transaction that = (Transaction) o;
 
-        if (getId() != that.getId()) return false;
-        if (getType() != that.getType()) return false;
+        if (getId() != that.getId())
+            return false;
+        if (getType() != that.getType())
+            return false;
         if (getTimestamp() != null ? !getTimestamp().equals(that.getTimestamp()) : that.getTimestamp() != null)
             return false;
         return getFields() != null ? getFields().equals(that.getFields()) : that.getFields() == null;
-
     }
 
     @Override
