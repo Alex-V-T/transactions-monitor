@@ -1,6 +1,5 @@
 package com.alext.monitor.generator;
 
-import com.alext.monitor.TransactionType;
 import com.alext.monitor.storage.mongodb.MongoConstants;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -13,8 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.*;
 
+import static com.alext.monitor.storage.mongodb.TransactionsGenerator.generateNewTransaction;
+
 public class Application {
-    private static final Random random = new Random();
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -51,22 +51,5 @@ public class Application {
             return queryResults.iterator().next().getLong(MongoConstants.MAX);
 
         return 1;
-    }
-
-    private static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
-        int x = random.nextInt(clazz.getEnumConstants().length);
-        return clazz.getEnumConstants()[x];
-    }
-
-    static Document generateNewTransaction(long id) {
-        String type = randomEnum(TransactionType.class).name().toLowerCase();
-        Document newDocument = new Document(MongoConstants._ID, id)
-                .append("type", type)
-                .append("timestamp", new Date());
-
-        for (int i = 0; i < 50; i++) {
-            newDocument.append(type + "Field" + i, "value" + i);
-        }
-        return newDocument;
     }
 }

@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import java.util.Collection;
 
+import static com.alext.monitor.storage.mongodb.TransactionsGenerator.generateNewTransaction;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class MongoStorageTest {
 
     @Test
     public void testgetIdOfLastPublished_emptyDatabase_returnsNoRecords() {
-        MongoStorage dao = new MongoStorage(MONGODB_LOCALHOST_URL, "testgetIdOfLastPublished_emptyDatabase_returnsNoRecords");
+        MongoStorage dao = new MongoStorage(MONGODB_LOCALHOST_URL, "emptyDatabase");
 
         long id = dao.getIdOfLastPublished();
 
@@ -66,7 +67,7 @@ public class MongoStorageTest {
 
     @Test
     public void testgetIdOfLastPublished_markPublished_returnsNoRecords() {
-        MongoStorage dao = new MongoStorage(MONGODB_LOCALHOST_URL, "testgetIdOfLastPublished_markPublished_returnsNoRecords");
+        MongoStorage dao = new MongoStorage(MONGODB_LOCALHOST_URL, "markPublished");
 
         long id = dao.getIdOfLastPublished();
 
@@ -89,4 +90,16 @@ public class MongoStorageTest {
         assertEquals(id, dao.getIdOfLastPublished());
     }
 
+    @Test
+    public void testgetIdOfLastPublished_getTransactionsNewerThen_returnsNoRecords() {
+        MongoStorage dao = new MongoStorage(MONGODB_LOCALHOST_URL, "getTransactionsNewerThen");
+
+        dao.getTransactions().insertOne(generateNewTransaction(1));
+        dao.getTransactions().insertOne(generateNewTransaction(2));
+        dao.getTransactions().insertOne(generateNewTransaction(3));
+
+        Collection<Transaction> transactions = dao.getTransactionsNewerThan(1);
+
+        assertEquals(2, transactions.size());
+    }
 }

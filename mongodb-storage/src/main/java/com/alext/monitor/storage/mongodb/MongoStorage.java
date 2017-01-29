@@ -69,4 +69,8 @@ public class MongoStorage implements StorageApi {
 
         return result;
     }
+
+    MongoCollection<Document> getTransactions() {
+        return transactions;
+    }
 }
