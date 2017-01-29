@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static com.alext.monitor.storage.mongodb.MongoConstants._ID;
 
-class BsonConvertor {
+public class BsonConvertor {
     private static final String TYPE = "type";
     private static final String TIMESTAMP = "timestamp";
     private static final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");

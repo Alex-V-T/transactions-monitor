@@ -21,13 +21,13 @@ import java.util.List;
 public class MongoStorage implements StorageApi {
     private final MongoCollection<Document> transactions;
     private final MongoCollection<Document> published;
+    private final MongoClient mongoClient;
 
     MongoStorage(@Value("${mongo.url}") final String url,
                  @Value("${mongo.database}") final String dbName) {
-        try (MongoClient mongoClient = new MongoClient(new MongoClientURI(url))) {
-            transactions = mongoClient.getDatabase(dbName).getCollection("transactions");
-            published = mongoClient.getDatabase(dbName).getCollection("published");
-        }
+        mongoClient = new MongoClient(new MongoClientURI(url));
+        transactions = mongoClient.getDatabase(dbName).getCollection("transactions");
+        published = mongoClient.getDatabase(dbName).getCollection("published");
     }
 
     @Override
