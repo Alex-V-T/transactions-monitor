@@ -1,18 +1,17 @@
-package com.alext.monitor.generator;
+package com.alext.monitor.storage.mongodb;
 
 import com.alext.monitor.Transaction;
-import com.alext.monitor.storage.mongodb.BsonConvertor;
 import org.bson.Document;
 import org.junit.Test;
 
-import static com.alext.monitor.generator.Application.generateNewTransaction;
+import static com.alext.monitor.storage.mongodb.MongoConstants._ID;
+import static com.alext.monitor.storage.mongodb.TransactionsGenerator.generateNewTransaction;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class GeneratorAppTest {
+public class TransactionsGeneratorTest {
     @Test
     public void generateNewTransactionTest_generateOne_ReturnsNewTransaction() {
-
         long id = 987L;
         Document newMongoDoc = generateNewTransaction(id);
 

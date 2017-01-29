@@ -53,4 +53,34 @@ public class TransactionTest {
         assertTrue(transactionAsString.contains("id=" + String.valueOf(id)));
         assertTrue(transactionAsString.contains("type=" + type.toString()));
     }
+
+    @Test
+    public void testTransaction_hashCodeAndEqualsOfSameTransaction_returnsExpected() {
+        long id = 123;
+        TransactionType type = TransactionType.TRANSFER;
+        String timestamp = "4321 T 56:78";
+
+        Transaction transaction1 = new Transaction.Builder().
+                id(id).
+                type(type).
+                timestamp(timestamp).
+                field("field5", "value5").
+                field("field6", "value6").
+                build();
+
+        Transaction transaction2 = new Transaction.Builder().
+                id(id).
+                type(type).
+                timestamp(timestamp).
+                field("field5", "value5").
+                field("field6", "value6").
+                build();
+
+        assertTrue(transaction1.equals(transaction1));
+        assertTrue(transaction2.equals(transaction2));
+        assertTrue(transaction1.equals(transaction2));
+        assertTrue(transaction2.equals(transaction1));
+        assertEquals(transaction1.hashCode(), transaction2.hashCode());
+
+    }
 }
