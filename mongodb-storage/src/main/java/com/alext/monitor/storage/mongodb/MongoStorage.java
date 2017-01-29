@@ -23,7 +23,7 @@ public class MongoStorage implements StorageApi {
     private final MongoCollection<Document> published;
     private final MongoClient mongoClient;
 
-    MongoStorage(@Value("${mongo.url}") final String url,
+    public MongoStorage(@Value("${mongo.url}") final String url,
                  @Value("${mongo.database}") final String dbName) {
         mongoClient = new MongoClient(new MongoClientURI(url));
         transactions = mongoClient.getDatabase(dbName).getCollection("transactions");
@@ -70,7 +70,7 @@ public class MongoStorage implements StorageApi {
         return result;
     }
 
-    MongoCollection<Document> getTransactions() {
+    public MongoCollection<Document> getTransactions() {
         return transactions;
     }
 }
