@@ -18,20 +18,20 @@ public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Properties properties = new Properties();
+        final Properties properties = new Properties();
         properties.load(Application.class.getClassLoader().getResourceAsStream("mongo.properties"));
         final String url = properties.getProperty("mongo.url");
         final String database = properties.getProperty("mongo.database");
 
         try (MongoClient mongoClient = new MongoClient(new MongoClientURI(url))) {
 
-            MongoCollection<Document> transactions = mongoClient.getDatabase(database).getCollection("transactions");
+            final MongoCollection<Document> transactions = mongoClient.getDatabase(database).getCollection("transactions");
 
             long id = getLatestId(transactions);
 
             while (id < Integer.MAX_VALUE) {
                 id++;
-                Document newDocument = generateNewTransaction(id);
+                final Document newDocument = generateNewTransaction(id);
                 logger.info("Inserting new document: {}", newDocument);
                 transactions.insertOne(newDocument);
                 Thread.sleep(5000);
@@ -58,7 +58,7 @@ public class Application {
         return clazz.getEnumConstants()[x];
     }
 
-    private static Document generateNewTransaction(long id) {
+    static Document generateNewTransaction(long id) {
         String type = randomEnum(TransactionType.class).name().toLowerCase();
         Document newDocument = new Document(MongoConstants._ID, id)
                 .append("type", type)
