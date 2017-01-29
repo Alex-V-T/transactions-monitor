@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class TransactionTest {
 
@@ -30,6 +31,26 @@ public class TransactionTest {
         assertThat(transaction.getFields(), allOf(
                 hasEntry("field1", "value1"),
                 hasEntry("field2", "value2"))
-            );
+        );
+    }
+
+    @Test
+    public void testTransactionBuilder_toString_returnsExpected() {
+        long id = 123;
+        TransactionType type = TransactionType.TRANSFER;
+        String timestamp = "4321 T 56:78";
+
+        Transaction transaction = new Transaction.Builder().
+                id(id).
+                type(type).
+                timestamp(timestamp).
+                field("field5", "value5").
+                field("field6", "value6").
+                build();
+
+        String transactionAsString = transaction.toString();
+
+        assertTrue(transactionAsString.contains("id=" + String.valueOf(id)));
+        assertTrue(transactionAsString.contains("type=" + type.toString()));
     }
 }
